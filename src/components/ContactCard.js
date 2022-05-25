@@ -13,6 +13,9 @@ const ContactCard = (props) => {
                     <div>{email}</div>
                 </Link>
             </div>
+            <Link to={ {pathname:'/add', state: { contact: props.contact }} } >
+                <i className="edit outline icon" style={{color: 'blue', float: 'right'}}></i>
+            </Link>
             {/* Normal Delete code 
              <i className="trash alternate outline icon" style={{color:'red', float: 'right'}} onClick={()=> props.clickedContactId(id)}></i>
               */}

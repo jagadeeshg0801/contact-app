@@ -16,7 +16,6 @@ const ContactList = (props) => {
     });
 
     const isEmptyContacts = renderedContactList.length > 0 ? false : true;
-    console.log('renderedContactList', renderedContactList)
 
     if (isEmptyContacts) {
         return (
@@ -32,7 +31,7 @@ const ContactList = (props) => {
         return (
             <div className="contact-list-pane">
                 <div style={{ textAlign: 'right' }}>
-                    <Link to="/add"><button className="ui button blue " >Add</button></Link>
+                    <Link to="/add"><button className="ui button blue" >Add</button></Link>
                 </div>
                 <div className="ui celled list">{renderedContactList}</div>
             </div>

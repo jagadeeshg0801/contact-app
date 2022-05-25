@@ -21,9 +21,21 @@ function App() {
   /// using state
   const contactData = { email: '', name: '', id: '' };
   const [contacts, setContacts] = useState([]); // Initial Contacts Sate
-  const addContactHandler = (contact) => {
+  const addContactHandlers = (contact) => {
     console.log('contact', contact)
-    setContacts([...contacts, { id: new Date().getTime(), ...contact }]);  // Adding Contact here
+    if(contact.id !==''){
+      const index = contacts.findIndex((cont)=> contact.id === cont.id);
+      contacts[index]= {...contact};
+      console.log('update contacts', contacts)
+      setContacts([...contacts ]); 
+    }else{
+      const newContact = {  ...contact , id: new Date().getTime()};
+      console.log('newcontact', newContact)
+      setContacts([...contacts, newContact ]); 
+    }
+    // Adding Contact here
+    console.log('contacts', contacts)
+   
   }
 
   const removeContact = (id) => {
@@ -57,7 +69,7 @@ function App() {
           <div>
             <Switch>
               <Route exact path='/'  render={(props)=> <ContactList contacts={contacts} {...props}   getContactId={removeContact}/>}></Route>
-              <Route exact path="/add" render={(props) => <AddContact addContactHandler={addContactHandler} contactData={contactData} {...props}/>} /> 
+              <Route exact path="/add" render={(props) => <AddContact addContactHandler={addContactHandlers} contactData={contactData} {...props}/>} /> 
               <Route path="/contactDetails/:id" render={(props)=> <ContactDetails {...props}/>}/>
               <Route path="/deleteContact" render={(props)=> <DeleteContact {...props} clickedContactId={removeContact}/>} />
               <Route path="*" render={()=> <ErrorPage/>} ></Route>
