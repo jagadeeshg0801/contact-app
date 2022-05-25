@@ -27,6 +27,41 @@
 .App-link {
   color: #61dafb;
 }
+.nav-link{
+  background: #504545;
+  padding: 10px;
+  margin-bottom: 50px;
+}
+.nav-link > a {
+  padding: 10px;
+  color: #fff;
+  font-weight: 600;
+  font-variant: common-ligatures;
+}
+div.item:hover {
+  background: #f8f7ee;
+  color: #504545 !important;
+}
+.center-div{
+  text-align: center;
+}
+
+.empty-records {
+  background: #cec5c5;
+  padding: 10px;
+  color: #8f2d2d;   
+  margin: 10px 0;
+  border-radius: 4px;
+}
+
+.footer-pane{
+  position: absolute;
+  bottom: 0;
+  background: red;
+  width: 100%;
+  padding: 10px;
+  color: #fff;
+}
 
 @keyframes App-logo-spin {
   from {
