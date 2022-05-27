@@ -56,7 +56,7 @@ function App() {
     setSearchTerm(searchKey);
     console.log('key', searchKey);
     const newContactList = contacts.filter((contact)=>{
-      return (Object.values(contact).join('').includes(searchKey))
+      return (Object.values(contact).join('').toLowerCase().includes(searchKey.toLowerCase()))
     });
     if(searchKey){
       setSearchResults(newContactList);
