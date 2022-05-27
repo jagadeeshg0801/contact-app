@@ -21,13 +21,20 @@ function App() {
   /// using state
   const contactData = { email: '', name: '', id: '' };
   const [contacts, setContacts] = useState([]); // Initial Contacts Sate
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults]= useState([]);
   const addContactHandlers = (contact) => {
     console.log('contact', contact)
     if(contact.id !==''){
-      const index = contacts.findIndex((cont)=> contact.id === cont.id);
-      contacts[index]= {...contact};
-      console.log('update contacts', contacts)
-      setContacts([...contacts ]); 
+      // const index = contacts.findIndex((cont)=> contact.id === cont.id);
+      // contacts[index]= {...contact};
+       // [or]
+
+     const updatedContactsList = contacts.map((cont)=> {
+         return contact.id  === cont.id ? contact: cont
+       })
+      console.log('update contacts', updatedContactsList)
+      setContacts([...updatedContactsList ]); 
     }else{
       const newContact = {  ...contact , id: new Date().getTime()};
       console.log('newcontact', newContact)
@@ -43,6 +50,21 @@ function App() {
       return contact.id !== id;
     });
     setContacts(newContactsList);
+  }
+
+  const searchHandler = (searchKey)=>{
+    setSearchTerm(searchKey);
+    console.log('key', searchKey);
+    const newContactList = contacts.filter((contact)=>{
+      return (Object.values(contact).join('').includes(searchKey))
+    });
+    if(searchKey){
+      setSearchResults(newContactList);
+    }else{
+      setSearchResults(contacts);
+    }
+   
+    console.log('new contactList after search', newContactList)
   }
 
 
@@ -68,7 +90,7 @@ function App() {
           <Header />
           <div>
             <Switch>
-              <Route exact path='/'  render={(props)=> <ContactList contacts={contacts} {...props}   getContactId={removeContact}/>}></Route>
+              <Route exact path='/'  render={(props)=> <ContactList contacts={searchTerm.length<1? contacts: searchResults} {...props}   getContactId={removeContact} term={searchTerm} searchKeyWord={searchHandler}/>}></Route>
               <Route exact path="/add" render={(props) => <AddContact addContactHandler={addContactHandlers} contactData={contactData} {...props}/>} /> 
               <Route path="/contactDetails/:id" render={(props)=> <ContactDetails {...props}/>}/>
               <Route path="/deleteContact" render={(props)=> <DeleteContact {...props} clickedContactId={removeContact}/>} />
