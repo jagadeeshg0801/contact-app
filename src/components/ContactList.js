@@ -33,7 +33,7 @@ const ContactList = (props) => {
 
             <div className="ui search">
                     <div className="ui icon input" style={{ width: '100%', marginTop: '10px' }}>
-                        <input disabled={renderedContactList.length<1 && searchEle.current.value.length=== 0} ref={searchEle} type="text" className="prompt" placeholder="Search" onChange={getSearchTerm} value={props.term} />
+                        <input ref={searchEle} type="text" className="prompt" placeholder="Search" onChange={getSearchTerm} value={props.term} />
                         <i className="search icon"></i>
                     </div>
 
